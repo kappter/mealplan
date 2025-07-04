@@ -1,0 +1,101 @@
+term,definition,category,main_ingredients
+Buffalo Wings,"Spicy chicken wings coated in a tangy, hot sauce, typically served with celery and blue cheese or ranch dressing.",Appetizer,chicken
+Mozzarella Sticks,"Breaded and fried mozzarella cheese, served with marinara sauce for dipping.",Appetizer,cheese
+Nachos,"Tortilla chips topped with melted cheese, jalapeños, and often meats, beans, or salsa, served with sour cream and guacamole.",Appetizer,cheese,tortilla chips
+Deviled Eggs,"Hard-boiled eggs halved, with yolks mixed with mayonnaise, mustard, and spices, then piped back into the whites.",Appetizer,eggs
+Spinach Artichoke Dip,"Creamy dip made with spinach, artichoke hearts, cream cheese, and parmesan, served warm with chips or bread.",Appetizer,spinach,artichoke,cheese
+Bruschetta,"Toasted bread topped with a mixture of diced tomatoes, garlic, basil, and olive oil.",Appetizer,tomatoes,bread
+Calamari,"Fried squid rings, lightly breaded, served with marinara sauce or lemon aioli.",Appetizer,squid
+Chicken Quesadilla,"Flour tortilla filled with shredded chicken, cheese, and spices, grilled and served with salsa and sour cream.",Appetizer,chicken,cheese,tortilla
+Shrimp Cocktail,"Chilled shrimp served with a tangy cocktail sauce made from ketchup, horseradish, and lemon.",Appetizer,shrimp
+Stuffed Mushrooms,"Mushroom caps filled with a mixture of breadcrumbs, cheese, garlic, and herbs, then baked.",Appetizer,mushrooms,cheese
+Potato Skins,"Hollowed potato halves topped with melted cheese, bacon, and green onions, served with sour cream.",Appetizer,potatoes,cheese,bacon
+Onion Rings,"Sliced onions dipped in batter or breadcrumbs and deep-fried, often served with ketchup or ranch.",Appetizer,onions
+Guacamole and Chips,"Mashed avocado mixed with lime, cilantro, onion, and tomato, served with tortilla chips.",Appetizer,avocado,tortilla chips
+Pigs in a Blanket,"Mini sausages wrapped in puff pastry or crescent roll dough and baked until golden.",Appetizer,sausage,pastry
+Jalapeño Poppers,"Jalapeño peppers stuffed with cream cheese or cheddar, breaded, and fried.",Appetizer,jalapeños,cheese
+Hummus and Pita,"Creamy chickpea dip flavored with tahini, lemon, and garlic, served with soft pita bread.",Appetizer,chickpeas,pita
+Crab Cakes,"Patties made from crab meat, breadcrumbs, and seasonings, pan-fried and served with remoulade sauce.",Appetizer,crab
+Sliders,"Mini burgers with beef patties, cheese, and toppings like lettuce and tomato, served on small buns.",Appetizer,beef,cheese
+Chicken Tenders,"Breaded and fried chicken strips, served with dipping sauces like honey mustard or barbecue.",Appetizer,chicken
+Fried Pickles,"Pickle slices battered and fried, served with ranch or spicy dipping sauce.",Appetizer,pickles
+Cheese Platter,"Assorted cheeses like cheddar, brie, and gouda, served with crackers, grapes, and nuts.",Appetizer,cheese
+Meatballs,"Small balls of ground meat, often beef or pork, simmered in tomato sauce or served with a glaze.",Appetizer,beef,pork
+Clams Casino,"Baked clams topped with breadcrumbs, bacon, and a buttery herb mixture.",Appetizer,clams,bacon
+Ahi Tuna Tartare,"Raw, diced tuna mixed with soy sauce, sesame oil, and spices, served with wonton chips.",Appetizer,tuna
+Fried Green Tomatoes,"Sliced green tomatoes coated in cornmeal or flour and fried, often served with remoulade.",Appetizer,tomatoes
+Antipasto Skewers,"Bite-sized skewers with olives, mozzarella, salami, and cherry tomatoes, drizzled with balsamic.",Appetizer,mozzarella,salami,tomatoes
+Bacon-Wrapped Scallops,"Sea scallops wrapped in bacon, grilled or baked, and served with a glaze or lemon.",Appetizer,scallops,bacon
+Caprese Salad,"Sliced tomatoes, fresh mozzarella, and basil, drizzled with olive oil and balsamic reduction.",Appetizer,tomatoes,mozzarella
+Egg Rolls,"Crispy, fried rolls filled with cabbage, pork, or shrimp, served with sweet and sour sauce.",Appetizer,pork,shrimp,cabbage
+Ceviche,"Raw fish or shrimp marinated in lime juice with onions, cilantro, and peppers, served chilled.",Appetizer,fish,shrimp
+Pretzel Bites,"Soft, bite-sized pretzels served with warm cheese sauce or mustard.",Appetizer,pretzels,cheese
+Fried Mac and Cheese Balls,"Balls of macaroni and cheese, breaded and fried, served with marinara or ranch.",Appetizer,cheese,pasta
+Tater Tots,"Crispy, fried potato nuggets, often served with ketchup or cheese sauce.",Appetizer,potatoes
+Stuffed Bell Peppers,"Mini bell peppers filled with cream cheese, sausage, or spiced rice, then baked.",Appetizer,peppers,cheese,sausage
+Baked Brie,"Brie cheese baked until gooey, often topped with jam or nuts, served with crackers.",Appetizer,cheese
+Shrimp Tempura,"Lightly battered and fried shrimp, served with soy sauce or sweet chili dip.",Appetizer,shrimp
+Chicken Satay,"Grilled chicken skewers marinated in peanut sauce, served with extra sauce for dipping.",Appetizer,chicken
+Mini Quiches,"Small pastry crusts filled with egg, cheese, and fillings like spinach or bacon, baked until set.",Appetizer,eggs,cheese
+Chips and Salsa,"Tortilla chips paired with a fresh tomato-based salsa with onions, cilantro, and lime.",Appetizer,tortilla chips,tomatoes
+Garlic Bread,"Sliced bread topped with garlic butter and herbs, toasted until crispy.",Appetizer,bread
+Cucumber Bites,"Cucumber slices topped with cream cheese, dill, and smoked salmon or cherry tomatoes.",Appetizer,cucumber,cheese
+Fried Zucchini,"Zucchini slices battered and fried, served with marinara or ranch dressing.",Appetizer,zucchini
+Taquitos,"Small corn tortillas rolled with beef or chicken, fried, and served with salsa or guacamole.",Appetizer,beef,chicken,tortilla
+Pimento Cheese Dip,"Creamy spread of cheddar, pimentos, and mayonnaise, served with crackers or celery.",Appetizer,cheese
+Bacon-Wrapped Dates,"Dates stuffed with cheese or almonds, wrapped in bacon, and baked until crispy.",Appetizer,dates,bacon
+Chili Cheese Fries,"French fries topped with chili and melted cheese, often garnished with onions.",Appetizer,potatoes,cheese,beef
+Sausage Balls,"Bite-sized balls of sausage, cheese, and biscuit mix, baked until golden.",Appetizer,sausage,cheese
+Avocado Toast Bites,"Small toasts topped with mashed avocado, tomato, and seasonings like red pepper flakes.",Appetizer,avocado,tomatoes
+Mini Tacos,"Tiny tortillas filled with seasoned beef, chicken, or fish, topped with lettuce and cheese.",Appetizer,beef,chicken,fish,tortilla
+Sweet Potato Fries,"Crispy fried sweet potato sticks, served with a dipping sauce like honey mustard.",Appetizer,sweet potatoes
+French Fries,"Deep-fried potato strips, crispy on the outside and soft inside.",Side,potatoes
+Mashed Potatoes,"Creamy mashed potatoes often served with gravy.",Side,potatoes
+Baked Potato,"Whole potato baked and often topped with butter or sour cream.",Side,potatoes
+Potato Salad,"Cold salad of boiled potatoes mixed with mayo and seasonings.",Side,potatoes
+Coleslaw,"Shredded cabbage and carrots in a tangy dressing.",Side,cabbage,carrots
+Macaroni and Cheese,"Elbow pasta in a creamy cheese sauce.",Side,pasta,cheese
+Green Beans,"Cooked or sautéed green beans, often seasoned or with almonds.",Side,green beans
+Steamed Broccoli,"Broccoli florets lightly steamed and served as a healthy side.",Side,broccoli
+Corn on the Cob,"Boiled or grilled corn served on the cob.",Side,corn
+Cornbread,"Baked bread made with cornmeal, often slightly sweet.",Side,cornmeal
+Dinner Rolls,"Soft, small yeast rolls served with butter.",Side,bread
+Garlic Bread,"Bread slices topped with garlic butter and baked.",Side,bread
+Onion Rings,"Sliced onions battered and deep-fried.",Side,onions
+Tater Tots,"Small, grated potato bites deep-fried to crispy perfection.",Side,potatoes
+Side Salad,"Small salad typically served with lettuce, tomatoes, and dressing.",Side,lettuce,tomatoes
+Caesar Salad,"Romaine lettuce with Caesar dressing, croutons, and Parmesan.",Side,lettuce,cheese
+Pasta Salad,"Cold pasta mixed with vegetables and dressing.",Side,pasta
+Rice Pilaf,"Seasoned rice dish often with vegetables or nuts.",Side,rice
+Fried Okra,"Okra pieces battered and deep-fried.",Side,okra
+Baked Beans,"Beans in a sweet or savory tomato-based sauce.",Side,beans
+Sweet Potato Fries,"Thin sweet potato strips deep-fried.",Side,sweet potatoes
+Sweet Potato Casserole,"Mashed sweet potatoes baked with brown sugar and marshmallows.",Side,sweet potatoes
+Stuffing,"Seasoned bread mixture often served at holidays.",Side,bread
+Gravy,"Savory sauce poured over meat or mashed potatoes.",Side,none
+Deviled Eggs,"Hard-boiled eggs with a seasoned yolk-mayo filling.",Side,eggs
+Pickles,"Crisp cucumber slices cured in vinegar and seasonings.",Side,cucumber
+Brussels Sprouts,"Small cabbage-like vegetables roasted or sautéed.",Side,brussels sprouts
+Roasted Carrots,"Carrots baked in the oven, often with herbs.",Side,carrots
+Cucumber Salad,"Chilled cucumbers in vinegar or yogurt dressing.",Side,cucumber
+Fruit Salad,"Mix of fresh fruits, sometimes with a sweet dressing.",Side,fruit
+Applesauce,"Pureed cooked apples often sweetened or spiced.",Side,apples
+Chips and Salsa,"Tortilla chips served with tomato salsa.",Side,tortilla chips,tomatoes
+Mozzarella Sticks,"Breaded and fried cheese sticks.",Side,cheese
+Zucchini Fritters,"Grated zucchini formed into patties and fried.",Side,zucchini
+Hush Puppies,"Deep-fried cornmeal balls often served with seafood.",Side,cornmeal
+Fried Green Tomatoes,"Unripe tomatoes battered and fried.",Side,tomatoes
+Sauteed Spinach,"Spinach leaves cooked lightly with garlic and oil.",Side,spinach
+Creamed Spinach,"Spinach in a creamy white sauce.",Side,spinach
+Broccoli Casserole,"Baked dish with broccoli, cheese, and breadcrumbs.",Side,broccoli,cheese
+Glazed Carrots,"Carrots cooked with brown sugar and butter.",Side,carrots
+Ratatouille,"French vegetable stew often served as a side.",Side,eggplant,zucchini,tomatoes
+Roasted Potatoes,"Cubed or wedged potatoes roasted with herbs.",Side,potatoes
+Wild Rice,"Nutty-flavored rice often used as a pilaf.",Side,rice
+Polenta,"Creamy cornmeal often served as a savory side.",Side,cornmeal
+Grilled Vegetables,"Assorted vegetables grilled and seasoned.",Side,vegetables
+Cranberry Sauce,"Sweet-tart sauce served with turkey.",Side,cranberries
+Cabbage Slaw,"Cabbage and carrot salad with vinegar dressing.",Side,cabbage,carrots
+Beet Salad,"Beets served chilled with vinaigrette or goat cheese.",Side,beets
+Cauliflower Mash,"Creamy mashed cauliflower as a low-carb substitute.",Side,cauliflower
+Eggplant Caponata,"Italian eggplant relish with tomato and vinegar.",Side
