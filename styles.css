@@ -27,7 +27,7 @@
 body {
   background-color: var(--bg, var(--tan));
   color: var(--text, #4B5563);
-  background: linear-gradient(45deg, var(--tan), #A6808C); /* Default gradient */
+  background: linear-gradient(45deg, var(--tan), #A6808C);
   transition: background 1s ease-in-out;
 }
 
@@ -76,23 +76,63 @@ header, footer {
 }
 
 /* Button hover effect */
-.category-btn, #randomize-btn {
-  transition: background-color 0.3s ease-in-out;
+.category-btn, #randomize-btn, #copy-prompt-btn {
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Scale animation for buttons */
+@keyframes scale {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.animate-scale {
+  animation: scale 0.2s ease-in-out;
+}
+
+/* Bounce animation for ingredient cards */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.animate-bounce {
+  animation: bounce 0.3s ease-in-out;
+}
+
+/* Ripple effect for randomize button */
+#randomize-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+#randomize-btn:active::after {
+  width: 100px;
+  height: 100px;
 }
 
 /* Result card animation */
 @keyframes resultFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .animate-result {
   animation: resultFadeIn 0.5s ease-in-out;
+}
+
+/* Filter bubble animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.filter-bubble {
+  animation: float 2s ease-in-out infinite;
 }
 
 /* Result card */
@@ -130,5 +170,9 @@ main {
   }
   #intro-screen p {
     font-size: 1rem;
+  }
+  .filter-bubble {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
   }
 }

@@ -60,20 +60,17 @@
     <h2 class="text-3xl md:text-4xl font-semibold text-burgundy mb-8">Dream Your Perfect Meal</h2>
     <p class="text-lg text-gray-700 mb-12 max-w-md">Let your culinary desires guide you to a delightful dish, crafted from your favorite ingredients.</p>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
-      <button id="explore-ingredients" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">
-        Savor by Ingredient
-      </button>
-      <button id="random-meal" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">
-        Surprise Me
-      </button>
-      <button id="browse-categories" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">
-        Explore Categories
-      </button>
+      <button id="explore-ingredients" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">Savor by Ingredient</button>
+      <button id="random-meal" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">Surprise Me</button>
+      <button id="browse-categories" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">Explore Categories</button>
     </div>
   </section>
 
   <!-- Main App Content -->
   <main id="main-content" class="flex-grow container mx-auto px-4 py-8 mt-12 mb-12 hidden">
+    <!-- Filter Bubbles -->
+    <section id="filter-bubbles" class="flex justify-center space-x-4 mb-6"></section>
+
     <!-- Category selection -->
     <section class="mb-8">
       <h2 class="text-xl font-semibold text-burgundy mb-4 text-center">Select Category</h2>
@@ -94,15 +91,16 @@
 
     <!-- Randomize button -->
     <section class="text-center mb-8">
-      <button id="randomize-btn" class="bg-burgundy text-tan px-6 py-3 rounded hover:bg-burgundy-dark">Randomize Meal</button>
+      <button id="randomize-btn" class="bg-burgundy text-tan px-6 py-3 rounded hover:bg-burgundy-dark relative overflow-hidden">Randomize Meal</button>
     </section>
 
     <!-- Result display -->
     <section id="result" class="bg-white p-6 rounded shadow-md hidden max-w-lg mx-auto animate-result">
       <h2 class="text-xl font-semibold text-burgundy mb-2">Your Meal</h2>
       <p id="dish-name" class="text-lg font-bold text-burgundy"></p>
-      <p id="dish SOLID-description" class="text-gray-700 mb-4"></p>
+      <p id="dish-description" class="text-gray-700 mb-4"></p>
       <p id="search-prompt" class="text-burgundy italic"></p>
+      <button id="copy-prompt-btn" class="bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark mt-4">Copy Search Prompt</button>
     </section>
 
     <!-- Loading state -->
@@ -131,7 +129,6 @@
       }
     }
 
-    // Load saved theme
     if (localStorage.getItem('theme') === 'dark') {
       setDarkMode(true);
     }
@@ -156,6 +153,9 @@ Spinach Artichoke Dip,Creamy dip made with spinach, artichoke hearts, cream chee
 Tacos al Pastor,Spit-grilled pork with pineapple and onions, served in corn tortillas with cilantro.,Mexican Food,pork,pineapple,tortilla
 Chilaquiles,Fried tortilla chips simmered in red or green salsa, topped with cheese and crema.,Mexican Food,tortilla,cheese
 Mole Poblano,Chicken served with a rich sauce made from chilies, chocolate, and spices.,Mexican Food,chicken,mole sauce
+Elote,Grilled corn on the cob slathered with mayonnaise, cheese, and chili powder.,Mexican Food,corn,cheese
+Cochinita Pibil,Slow-roasted pork marinated in citrus and achiote, served with tortillas.,Mexican Food,pork,tortilla
+Churros,Fried dough pastries dusted with cinnamon sugar, often served with chocolate sauce.,Mexican Food,dough,cinnamon
 `;
 
     let dishes = [];
@@ -189,7 +189,7 @@ Mole Poblano,Chicken served with a rich sauce made from chilies, chocolate, and 
       dishes.forEach(dish => {
         dish.main_ingredients.forEach(ingredient => ingredients.add(ingredient));
       });
-      return Array.from(ingredients).sort(); // Sort for consistent display
+      return Array.from(ingredients).sort();
     }
 
     // Render ingredient cards
@@ -197,30 +197,65 @@ Mole Poblano,Chicken served with a rich sauce made from chilies, chocolate, and 
       const ingredientList = document.getElementById('ingredient-list');
       ingredientList.innerHTML = '';
       const ingredients = getUniqueIngredients();
-      // Shuffle ingredients for visual refresh, ensuring highlightIngredient is first if provided
       const shuffledIngredients = highlightIngredient
         ? [highlightIngredient, ...ingredients.filter(i => i !== highlightIngredient).sort(() => Math.random() - 0.5)]
         : ingredients.sort(() => Math.random() - 0.5);
       shuffledIngredients.forEach(ingredient => {
         const card = document.createElement('div');
-        card.className = `ingredient-card bg-tan p-4 rounded cursor-pointer hover:bg-tan-dark dark:bg-dark-tan dark:hover:bg-dark-tan-dark ${ingredient === highlightIngredient ? 'bg-tan-dark dark:bg-dark-tan-dark animate-pulse' : ''}`;
+        card.className = `ingredient-card bg-tan p-4 rounded cursor-pointer hover:bg-tan-dark dark:bg-dark-tan dark:hover:bg-dark-tan-dark ${ingredient === highlightIngredient ? 'bg-tan-dark dark:bg-dark-tan-dark animate-bounce' : ''}`;
         card.textContent = ingredient.charAt(0).toUpperCase() + ingredient.slice(1);
         card.addEventListener('click', () => {
           selectedIngredient = ingredient;
-          document.querySelectorAll('.ingredient-card').forEach(c => c.classList.remove('bg-tan-dark', 'dark:bg-dark-tan-dark', 'animate-pulse'));
-          card.classList.add('bg-tan-dark', 'dark:bg-dark-tan-dark');
+          document.querySelectorAll('.ingredient-card').forEach(c => c.classList.remove('bg-tan-dark', 'dark:bg-dark-tan-dark', 'animate-bounce'));
+          card.classList.add('bg-tan-dark', 'dark:bg-dark-tan-dark', 'animate-bounce');
+          updateFilterBubbles();
         });
         ingredientList.appendChild(card);
       });
+    }
+
+    // Update filter bubbles
+    function updateFilterBubbles() {
+      const filterBubbles = document.getElementById('filter-bubbles');
+      filterBubbles.innerHTML = '';
+      if (selectedCategory !== 'All') {
+        const categoryBubble = document.createElement('div');
+        categoryBubble.className = 'filter-bubble bg-burgundy text-tan px-4 py-2 rounded-full flex items-center animate-float';
+        categoryBubble.innerHTML = `${selectedCategory} <span class="ml-2 cursor-pointer" onclick="clearCategoryFilter()">✕</span>`;
+        filterBubbles.appendChild(categoryBubble);
+      }
+      if (selectedIngredient) {
+        const ingredientBubble = document.createElement('div');
+        ingredientBubble.className = 'filter-bubble bg-burgundy text-tan px-4 py-2 rounded-full flex items-center animate-float';
+        ingredientBubble.innerHTML = `${selectedIngredient.charAt(0).toUpperCase() + selectedIngredient.slice(1)} <span class="ml-2 cursor-pointer" onclick="clearIngredientFilter()">✕</span>`;
+        filterBubbles.appendChild(ingredientBubble);
+      }
+    }
+
+    // Clear filters
+    function clearCategoryFilter() {
+      selectedCategory = 'All';
+      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark'));
+      document.getElementById('all-btn').classList.add('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark');
+      updateFilterBubbles();
+      renderIngredients(selectedIngredient);
+    }
+
+    function clearIngredientFilter() {
+      selectedIngredient = null;
+      document.querySelectorAll('.ingredient-card').forEach(c => c.classList.remove('bg-tan-dark', 'dark:bg-dark-tan-dark', 'animate-bounce'));
+      updateFilterBubbles();
+      renderIngredients();
     }
 
     // Handle category button clicks
     document.querySelectorAll('.category-btn').forEach(button => {
       button.addEventListener('click', () => {
         selectedCategory = button.textContent;
-        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark'));
-        button.classList.add('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark');
-        renderIngredients(); // Refresh ingredient cards on category change
+        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark', 'animate-scale'));
+        button.classList.add('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark', 'animate-scale');
+        updateFilterBubbles();
+        renderIngredients(selectedIngredient);
       });
     });
 
@@ -272,30 +307,52 @@ Mole Poblano,Chicken served with a rich sauce made from chilies, chocolate, and 
         resultSection.classList.add('animate-result');
       }, 100);
       
-      // Refresh ingredient cards, highlighting selected ingredient
+      // Refresh ingredient cards
       renderIngredients(selectedIngredient);
     });
 
-    // Intro screen button handlers
-    const introScreen = document.getElementById('intro-screen');
-    const mainContent = document.getElementById('main-content');
+    // Copy search prompt to clipboard
+    document.getElementById('copy-prompt-btn').addEventListener('click', () => {
+      const promptText = document.getElementById('search-prompt').textContent;
+      navigator.clipboard.writeText(promptText).then(() => {
+        const btn = document.getElementById('copy-prompt-btn');
+        btn.textContent = 'Copied!';
+        btn.classList.add('animate-scale');
+        setTimeout(() => {
+          btn.textContent = 'Copy Search Prompt';
+          btn.classList.remove('animate-scale');
+        }, 1000);
+      }).catch(() => {
+        alert('Failed to copy to clipboard. Please copy manually: ' + promptText);
+      });
+    });
+
+    // Intro screen button handlers with sound
+    const clickSound = new Audio('https://freesound.org/data/previews/171/171671_2437358-lq.mp3'); // Public domain click sound
+    document.querySelectorAll('.intro-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        clickSound.play().catch(() => console.log('Sound play failed'));
+        button.classList.add('animate-pulse');
+        setTimeout(() => button.classList.remove('animate-pulse'), 300);
+      });
+    });
 
     document.getElementById('explore-ingredients').addEventListener('click', () => {
-      introScreen.classList.add('hidden');
-      mainContent.classList.remove('hidden');
+      document.getElementById('intro-screen').classList.add('hidden');
+      document.getElementById('main-content').classList.remove('hidden');
       renderIngredients();
     });
 
     document.getElementById('random-meal').addEventListener('click', () => {
-      introScreen.classList.add('hidden');
-      mainContent.classList.remove('hidden');
+      document.getElementById('intro-screen').classList.add('hidden');
+      document.getElementById('main-content').classList.remove('hidden');
       renderIngredients();
       document.getElementById('randomize-btn').click();
     });
 
     document.getElementById('browse-categories').addEventListener('click', () => {
-      introScreen.classList.add('hidden');
-      mainContent.classList.remove('hidden');
+      document.getElementById('intro-screen').classList.add('hidden');
+      document.getElementById('main-content').classList.remove('hidden');
       renderIngredients();
       document.getElementById('all-btn').click();
     });
