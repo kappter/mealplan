@@ -235,7 +235,7 @@ Churros,Fried dough pastries dusted with cinnamon sugar, often served with choco
     // Clear filters
     function clearCategoryFilter() {
       selectedCategory = 'All';
-      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark'));
+      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark', 'animate-scale'));
       document.getElementById('all-btn').classList.add('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark');
       updateFilterBubbles();
       renderIngredients(selectedIngredient);
@@ -328,7 +328,7 @@ Churros,Fried dough pastries dusted with cinnamon sugar, often served with choco
     });
 
     // Intro screen button handlers with sound
-    const clickSound = new Audio('https://freesound.org/data/previews/171/171671_2437358-lq.mp3'); // Public domain click sound
+    const clickSound = new Audio('https://freesound.org/data/previews/171/171671_2437358-lq.mp3');
     document.querySelectorAll('.intro-btn').forEach(button => {
       button.addEventListener('click', () => {
         clickSound.play().catch(() => console.log('Sound play failed'));
