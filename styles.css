@@ -1,0 +1,117 @@
+/* Custom colors for light and dark themes */
+:root {
+  --burgundy: #800020;
+  --burgundy-dark: #660018;
+  --tan: #D2B48C;
+  --tan-dark: #B89778;
+  --dark-bg: #2E2E2E;
+  --dark-burgundy: #A0002A;
+  --dark-burgundy-dark: #800020;
+  --dark-tan: #E8D0A9;
+  --dark-tan-dark: #C8B090;
+}
+
+/* Dark mode styles */
+.dark {
+  --bg: var(--dark-bg);
+  --text: var(--dark-tan);
+  --burgundy: var(--dark-burgundy);
+  --burgundy-dark: var(--dark-burgundy-dark);
+  --tan: var(--dark-tan);
+  --tan-dark: var(--dark-tan-dark);
+  --card-bg: #3C3C3C;
+  --text-secondary: #D1D5DB;
+}
+
+/* Default light mode styles */
+body {
+  background-color: var(--bg, var(--tan));
+  color: var(--text, #4B5563);
+}
+
+/* Smooth scrolling and box-sizing */
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* Header and footer styling */
+header, footer {
+  background-color: var(--burgundy);
+  color: var(--tan);
+  z-index: 1000;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+/* Dark mode toggle button */
+#dark-mode-toggle {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.dark #dark-mode-toggle {
+  background-color: var(--dark-tan);
+  color: var(--dark-burgundy);
+}
+
+/* Intro screen buttons */
+.intro-btn {
+  transition: all 0.3s ease-in-out;
+}
+.intro-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Ingredient card hover effect */
+.ingredient-card {
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+.ingredient-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Button hover effect */
+.category-btn, #randomize-btn {
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Result card */
+#result {
+  background-color: var(--card-bg, #FFFFFF);
+}
+
+/* Ensure main content is not overlapped by fixed header/footer */
+main {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+/* Centered result section */
+#result {
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ingredient-card {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  header h1 {
+    font-size: 1.25rem;
+  }
+  footer p {
+    font-size: 0.75rem;
+  }
+  #intro-screen h2 {
+    font-size: 1.75rem;
+  }
+  #intro-screen p {
+    font-size: 1rem;
+  }
+}
