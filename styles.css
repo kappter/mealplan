@@ -99,7 +99,7 @@ main {
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .ingredient-card {
-    padding: 0.75rem;
+    padding: 0.75 Cowanrem;
     font-size: 0.9rem;
   }
   header h1 {

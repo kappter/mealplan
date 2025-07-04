@@ -1,0 +1,268 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Randomizer</title>
+  <script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-tan font-sans flex flex-col min-h-screen">
+  <header class="fixed top-0 w-full bg-burgundy text-tan p-2 text-center shadow-md flex justify-between items-center">
+    <h1 class="text-xl md:text-2xl font-bold">Meal Randomizer</h1>
+    <button id="dark-mode-toggle" class="bg-tan text-burgundy px-3 py-1 rounded-full hover:bg-tan-dark" aria-label="Toggle dark mode">
+      <span class="dark-mode-icon">🌙</span>
+    </button>
+  </header>
+
+  <!-- Introductory Screen -->
+  <section id="intro-screen" class="flex-grow flex flex-col items-center justify-center text-center px-4">
+    <h2 class="text-3xl md:text-4xl font-semibold text-burgundy mb-8">Dream Your Perfect Meal</h2>
+    <p class="text-lg text-gray-700 mb-12 max-w-md">Let your culinary desires guide you to a delightful dish, crafted from your favorite ingredients.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
+      <button id="explore-ingredients" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">
+        Savor by Ingredient
+      </button>
+      <button id="random-meal" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">
+        Surprise Me
+      </button>
+      <button id="browse-categories" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">
+        Explore Categories
+      </button>
+    </div>
+  </section>
+
+  <!-- Main App Content -->
+  <main id="main-content" class="flex-grow container mx-auto px-4 py-8 mt-12 mb-12 hidden">
+    <!-- Category selection -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-burgundy mb-4 text-center">Select Category</h2>
+      <div class="flex justify-center space-x-4 flex-wrap gap-2">
+        <button id="all-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">All</button>
+        <button id="appetizer-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">Appetizer</button>
+        <button id="side-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">Side</button>
+        <button id="entree-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">Entree</button>
+        <button id="mexican-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">Mexican Food</button>
+      </div>
+    </section>
+
+    <!-- Ingredient selection -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold text-burgundy mb-4 text-center">Select an Ingredient</h2>
+      <div id="ingredient-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+    </section>
+
+    <!-- Randomize button -->
+    <section class="text-center mb-8">
+      <button id="randomize-btn" class="bg-burgundy text-tan px-6 py-3 rounded hover:bg-burgundy-dark">Randomize Meal</button>
+    </section>
+
+    <!-- Result display -->
+    <section id="result" class="bg-white p-6 rounded shadow-md hidden max-w-lg mx-auto">
+      <h2 class="text-xl font-semibold text-burgundy mb-2">Your Meal</h2>
+      <p id="dish-name" class="text-lg font-bold text-burgundy"></p>
+      <p id="dish-description" class="text-gray-700 mb-4"></p>
+      <p id="search-prompt" class="text-burgundy italic"></p>
+    </section>
+
+    <!-- Loading state -->
+    <div id="loading" class="text-center text-burgundy">Loading dish data...</div>
+  </main>
+
+  <footer class="fixed bottom-0 w-full bg-burgundy text-tan p-2 text-center shadow-md">
+    <p class="text-sm">Powered by xAI © 2025</p>
+  </footer>
+
+  <script>
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+    const darkModeIcon = darkModeToggle.querySelector('.dark-mode-icon');
+
+    function setDarkMode(isDark) {
+      if (isDark) {
+        body.classList.add('dark');
+        darkModeIcon.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      } else {
+        body.classList.remove('dark');
+        darkModeIcon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      setDarkMode(true);
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+      setDarkMode(!body.classList.contains('dark'));
+    });
+
+    // Simulated CSV data (replace with fetch to us_dishes.csv in production)
+    const simulatedCsvData = `
+term,definition,category,main_ingredients
+Hamburger,A grilled beef patty served in a bun with various toppings.,Entree,beef
+Cheeseburger,A hamburger topped with one or more slices of cheese.,Entree,beef,cheese
+Fried Chicken,Chicken pieces breaded and deep-fried until crispy.,Entree,chicken
+Eggplant Parmesan,Breaded eggplant with marinara and cheese.,Entree,eggplant,cheese
+Mozzarella Sticks,Breaded and fried mozzarella cheese, served with marinara sauce for dipping.,Appetizer,cheese
+Buffalo Wings,Spicy chicken wings coated in a tangy, hot sauce, typically served with celery and blue cheese or ranch dressing.,Appetizer,chicken
+Mashed Potatoes,Creamy mashed potatoes often served with gravy.,Side,potatoes
+French Fries,Deep-fried potato strips, crispy on the outside and soft inside.,Side,potatoes
+Green Beans,Cooked or sautéed green beans, often seasoned or with almonds.,Side,green beans
+Spinach Artichoke Dip,Creamy dip made with spinach, artichoke hearts, cream cheese, and parmesan, served warm with chips or bread.,Appetizer,spinach,artichoke,cheese
+Tacos al Pastor,Spit-grilled pork with pineapple and onions, served in corn tortillas with cilantro.,Mexican Food,pork,pineapple,tortilla
+Chilaquiles,Fried tortilla chips simmered in red or green salsa, topped with cheese and crema.,Mexican Food,tortilla,cheese
+Mole Poblano,Chicken served with a rich sauce made from chilies, chocolate, and spices.,Mexican Food,chicken,mole sauce
+`;
+
+    let dishes = [];
+    let selectedCategory = 'All';
+    let selectedIngredient = null;
+
+    // Parse CSV data
+    Papa.parse(simulatedCsvData, {
+      header: true,
+      skipEmptyLines: true,
+      transformHeader: (header) => header.trim().replace(/^"|"$/g, ''),
+      transform: (value) => value.trim().replace(/^"|"$/g, ''),
+      complete: (results) => {
+        dishes = results.data.map(row => ({
+          term: row['term'],
+          definition: row['definition'],
+          category: row['category'],
+          main_ingredients: row['main_ingredients'].split(',').map(i => i.trim())
+        }));
+        document.getElementById('loading').classList.add('hidden');
+      },
+      error: (err) => {
+        console.error('Error parsing CSV:', err);
+        document.getElementById('loading').textContent = 'Error loading data';
+      }
+    });
+
+    // Get unique ingredients
+    function getUniqueIngredients() {
+      const ingredients = new Set();
+      dishes.forEach(dish => {
+        dish.main_ingredients.forEach(ingredient => ingredients.add(ingredient));
+      });
+      return Array.from(ingredients);
+    }
+
+    // Render ingredient cards
+    function renderIngredients() {
+      const ingredientList = document.getElementById('ingredient-list');
+      ingredientList.innerHTML = '';
+      const ingredients = getUniqueIngredients();
+      ingredients.forEach(ingredient => {
+        const card = document.createElement('div');
+        card.className = 'ingredient-card bg-tan p-4 rounded cursor-pointer hover:bg-tan-dark dark:bg-dark-tan dark:hover:bg-dark-tan-dark';
+        card.textContent = ingredient.charAt(0).toUpperCase() + ingredient.slice(1);
+        card.addEventListener('click', () => {
+          selectedIngredient = ingredient;
+          document.querySelectorAll('.ingredient-card').forEach(c => c.classList.remove('bg-tan-dark', 'dark:bg-dark-tan-dark'));
+          card.classList.add('bg-tan-dark', 'dark:bg-dark-tan-dark');
+        });
+        ingredientList.appendChild(card);
+      });
+    }
+
+    // Handle category button clicks
+    document.querySelectorAll('.category-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        selectedCategory = button.textContent;
+        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark'));
+        button.classList.add('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark');
+      });
+    });
+
+    // Randomize meal
+    document.getElementById('randomize-btn').addEventListener('click', () => {
+      const filteredDishes = dishes.filter(dish => {
+        const categoryMatch = selectedCategory === 'All' || dish.category === selectedCategory;
+        const ingredientMatch = !selectedIngredient || dish.main_ingredients.includes(selectedIngredient);
+        return categoryMatch && ingredientMatch;
+      });
+
+      if (filteredDishes.length === 0) {
+        document.getElementById('result').classList.add('hidden');
+        alert('No dishes match your selection.');
+        return;
+      }
+
+      const randomDish = filteredDishes[Math.floor(Math.random() * filteredDishes.length)];
+      document.getElementById('dish-name').textContent = randomDish.term;
+      document.getElementById('dish-description').textContent = randomDish.definition;
+      document.getElementById('search-prompt').textContent = `Search for: recipe for ${randomDish.term}`;
+      document.getElementById('result').classList.remove('hidden');
+    });
+
+    // Intro screen button handlers
+    const introScreen = document.getElementById('intro-screen');
+    const mainContent = document.getElementById('main-content');
+
+    document.getElementById('explore-ingredients').addEventListener('click', () => {
+      introScreen.classList.add('hidden');
+      mainContent.classList.remove('hidden');
+      renderIngredients();
+    });
+
+    document.getElementById('random-meal').addEventListener('click', () => {
+      introScreen.classList.add('hidden');
+      mainContent.classList.remove('hidden');
+      renderIngredients();
+      document.getElementById('randomize-btn').click();
+    });
+
+    document.getElementById('browse-categories').addEventListener('click', () => {
+      introScreen.classList.add('hidden');
+      mainContent.classList.remove('hidden');
+      renderIngredients();
+      document.getElementById('all-btn').click();
+    });
+  </script>
+</body>
+</html>
