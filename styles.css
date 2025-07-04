@@ -19,7 +19,7 @@
   --burgundy-dark: var(--dark-burgundy-dark);
   --tan: var(--dark-tan);
   --tan-dark: var(--dark-tan-dark);
-  --card-bg: #3C3C3C;
+  --card-bg: rgba(60, 60, 60, 0.9);
   --text-secondary: #D1D5DB;
 }
 
@@ -137,7 +137,7 @@ header, footer {
 
 /* Result card */
 #result {
-  background-color: var(--card-bg, #FFFFFF);
+  background-color: var(--card-bg, rgba(255, 255, 255, 0.9));
 }
 
 /* Ensure main content is not overlapped by fixed header/footer */
