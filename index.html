@@ -1,361 +1,61 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meal Randomizer</title>
-  <script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Randomizer</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-tan font-sans flex flex-col min-h-screen transition-all duration-500">
-  <header class="fixed top-0 w-full bg-burgundy text-tan p-2 text-center shadow-md flex justify-between items-center">
-    <h1 class="text-xl md:text-2xl font-bold">Meal Randomizer</h1>
-    <button id="dark-mode-toggle" class="bg-tan text-burgundy px-3 py-1 rounded-full hover:bg-tan-dark" aria-label="Toggle dark mode">
-      <span class="dark-mode-icon">🌙</span>
-    </button>
-  </header>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-5">
+    <div class="container rounded-3xl shadow-xl p-10 flex flex-col gap-8">
+        <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-6">Meal Randomizer</h1>
 
-  <!-- Introductory Screen -->
-  <section id="intro-screen" class="flex-grow flex flex-col items-center justify-center text-center px-4">
-    <h2 class="text-3xl md:text-4xl font-semibold text-burgundy mb-8">Dream Your Perfect Meal</h2>
-    <p class="text-lg text-gray-700 mb-12 max-w-md">Let your culinary desires guide you to a delightful dish, crafted from your favorite ingredients.</p>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl">
-      <button id="explore-ingredients" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">Savor by Ingredient</button>
-      <button id="random-meal" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">Surprise Me</button>
-      <button id="browse-categories" class="intro-btn bg-burgundy text-tan px-6 py-4 rounded-full hover:bg-burgundy-dark hover:scale-105 transition-all">Explore Categories</button>
+        <!-- Randomized Meal Display -->
+        <div class="bg-indigo-50 p-6 rounded-2xl shadow-inner text-center">
+            <h2 class="text-2xl font-bold text-indigo-700 mb-3">Your Next Meal Idea:</h2>
+            <p id="appetizer-display" class="text-xl font-semibold text-gray-800 mb-2">Appetizer: </p>
+            <p id="entree-display" class="text-3xl font-semibold text-gray-900 mb-2">Entree: Loading meals...</p>
+            <p id="side-display" class="text-xl font-semibold text-gray-800 mb-4">Side: </p>
+            <p id="meal-category" class="text-lg text-gray-600 mb-2"></p>
+            <p id="meal-ingredients" class="text-md text-gray-500"></p>
+        </div>
+
+        <!-- Randomize Button -->
+        <button id="randomize-button" class="btn-primary text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+            Randomize Full Meal
+        </button>
+
+        <!-- Filter by Base Ingredient -->
+        <div class="bg-gray-50 p-6 rounded-2xl shadow-md">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Have an entree ingredient to use?</h3>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="text" id="base-ingredient-input" placeholder="e.g., Eggplant, Chicken, Lentils"
+                       class="input-field flex-grow p-3 rounded-lg text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
+                <button id="filter-button" class="btn-primary text-white font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                    Find Meal with Entree Ingredient
+                </button>
+            </div>
+        </div>
+
+        <!-- Hovering Food Items for Quick Selection (Entree Focus) -->
+        <div class="bg-gray-50 p-6 rounded-2xl shadow-md">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Or click on a main entree food item:</h3>
+            <div id="food-items-container" class="food-items-grid grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
+                <!-- Food item buttons will be injected here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Search Request / AI Prompt Display -->
+        <div class="prompt-box p-6 rounded-2xl shadow-inner">
+            <h3 class="text-xl font-semibold text-indigo-800 mb-3">Recipe Search / AI Prompt:</h3>
+            <p id="prompt-display" class="text-gray-700 text-lg break-words">Your prompt will appear here after a meal is selected.</p>
+        </div>
     </div>
-  </section>
 
-  <!-- Main App Content -->
-  <main id="main-content" class="flex-grow container mx-auto px-4 py-8 mt-12 mb-12 hidden">
-    <!-- Filter Bubbles -->
-    <section id="filter-bubbles" class="flex justify-center space-x-4 mb-6"></section>
-
-    <!-- Category selection -->
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold text-burgundy mb-4 text-center">Select Category</h2>
-      <div class="flex justify-center space-x-4 flex-wrap gap-2">
-        <button id="all-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">All</button>
-        <button id="appetizer-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">Appetizer</button>
-        <button id="side-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">Side</button>
-        <button id="entree-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">Entree</button>
-        <button id="mexican-btn" class="category-btn bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark">Mexican Food</button>
-      </div>
-    </section>
-
-    <!-- Ingredient selection -->
-    <section class="mb-8">
-      <h2 class="text-xl font-semibold text-burgundy mb-4 text-center">Select an Ingredient</h2>
-      <div id="ingredient-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
-    </section>
-
-    <!-- Randomize button -->
-    <section class="text-center mb-8">
-      <button id="randomize-btn" class="bg-burgundy text-tan px-6 py-3 rounded hover:bg-burgundy-dark relative overflow-hidden">Randomize Meal</button>
-    </section>
-
-    <!-- Result display -->
-    <section id="result" class="bg-white p-6 rounded shadow-md hidden max-w-lg mx-auto animate-result">
-      <h2 class="text-xl font-semibold text-burgundy mb-2">Your Meal</h2>
-      <p id="dish-name" class="text-lg font-bold text-burgundy"></p>
-      <p id="dish-description" class="text-gray-700 mb-4"></p>
-      <p id="search-prompt" class="text-burgundy italic"></p>
-      <button id="copy-prompt-btn" class="bg-burgundy text-tan px-4 py-2 rounded hover:bg-burgundy-dark mt-4">Copy Search Prompt</button>
-    </section>
-
-    <!-- Loading state -->
-    <div id="loading" class="text-center text-burgundy">Loading dish data...</div>
-  </main>
-
-  <footer class="fixed bottom-0 w-full bg-burgundy text-tan p-2 text-center shadow-md">
-    <p class="text-sm">Powered by xAI © 2025</p>
-  </footer>
-
-  <script>
-    // Dark mode toggle
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    const body = document.body;
-    const darkModeIcon = darkModeToggle.querySelector('.dark-mode-icon');
-
-    function setDarkMode(isDark) {
-      if (isDark) {
-        body.classList.add('dark');
-        darkModeIcon.textContent = '☀️';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        body.classList.remove('dark');
-        darkModeIcon.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
-      }
-    }
-
-    if (localStorage.getItem('theme') === 'dark') {
-      setDarkMode(true);
-    }
-
-    darkModeToggle.addEventListener('click', () => {
-      setDarkMode(!body.classList.contains('dark'));
-    });
-
-    // Simulated CSV data (replace with fetch to us_dishes.csv in production)
-    const simulatedCsvData = `
-term,definition,category,main_ingredients
-Hamburger,A grilled beef patty served in a bun with various toppings.,Entree,beef
-Cheeseburger,A hamburger topped with one or more slices of cheese.,Entree,beef,cheese
-Fried Chicken,Chicken pieces breaded and deep-fried until crispy.,Entree,chicken
-Eggplant Parmesan,Breaded eggplant with marinara and cheese.,Entree,eggplant,cheese
-Mozzarella Sticks,Breaded and fried mozzarella cheese, served with marinara sauce for dipping.,Appetizer,cheese
-Buffalo Wings,Spicy chicken wings coated in a tangy, hot sauce, typically served with celery and blue cheese or ranch dressing.,Appetizer,chicken
-Mashed Potatoes,Creamy mashed potatoes often served with gravy.,Side,potatoes
-French Fries,Deep-fried potato strips, crispy on the outside and soft inside.,Side,potatoes
-Green Beans,Cooked or sautéed green beans, often seasoned or with almonds.,Side,green beans
-Spinach Artichoke Dip,Creamy dip made with spinach, artichoke hearts, cream cheese, and parmesan, served warm with chips or bread.,Appetizer,spinach,artichoke,cheese
-Tacos al Pastor,Spit-grilled pork with pineapple and onions, served in corn tortillas with cilantro.,Mexican Food,pork,pineapple,tortilla
-Chilaquiles,Fried tortilla chips simmered in red or green salsa, topped with cheese and crema.,Mexican Food,tortilla,cheese
-Mole Poblano,Chicken served with a rich sauce made from chilies, chocolate, and spices.,Mexican Food,chicken,mole sauce
-Elote,Grilled corn on the cob slathered with mayonnaise, cheese, and chili powder.,Mexican Food,corn,cheese
-Cochinita Pibil,Slow-roasted pork marinated in citrus and achiote, served with tortillas.,Mexican Food,pork,tortilla
-Churros,Fried dough pastries dusted with cinnamon sugar, often served with chocolate sauce.,Mexican Food,dough,cinnamon
-`;
-
-    let dishes = [];
-    let selectedCategory = 'All';
-    let selectedIngredient = null;
-
-    // Parse CSV data
-    Papa.parse(simulatedCsvData, {
-      header: true,
-      skipEmptyLines: true,
-      transformHeader: (header) => header.trim().replace(/^"|"$/g, ''),
-      transform: (value) => value.trim().replace(/^"|"$/g, ''),
-      complete: (results) => {
-        dishes = results.data.map(row => ({
-          term: row['term'],
-          definition: row['definition'],
-          category: row['category'],
-          main_ingredients: row['main_ingredients'].split(',').map(i => i.trim())
-        }));
-        document.getElementById('loading').classList.add('hidden');
-      },
-      error: (err) => {
-        console.error('Error parsing CSV:', err);
-        document.getElementById('loading').textContent = 'Error loading data';
-      }
-    });
-
-    // Get unique ingredients
-    function getUniqueIngredients() {
-      const ingredients = new Set();
-      dishes.forEach(dish => {
-        dish.main_ingredients.forEach(ingredient => ingredients.add(ingredient));
-      });
-      return Array.from(ingredients).sort();
-    }
-
-    // Render ingredient cards
-    function renderIngredients(highlightIngredient = null) {
-      const ingredientList = document.getElementById('ingredient-list');
-      ingredientList.innerHTML = '';
-      const ingredients = getUniqueIngredients();
-      const shuffledIngredients = highlightIngredient
-        ? [highlightIngredient, ...ingredients.filter(i => i !== highlightIngredient).sort(() => Math.random() - 0.5)]
-        : ingredients.sort(() => Math.random() - 0.5);
-      shuffledIngredients.forEach(ingredient => {
-        const card = document.createElement('div');
-        card.className = `ingredient-card bg-tan p-4 rounded cursor-pointer hover:bg-tan-dark dark:bg-dark-tan dark:hover:bg-dark-tan-dark ${ingredient === highlightIngredient ? 'bg-tan-dark dark:bg-dark-tan-dark animate-bounce' : ''}`;
-        card.textContent = ingredient.charAt(0).toUpperCase() + ingredient.slice(1);
-        card.addEventListener('click', () => {
-          selectedIngredient = ingredient;
-          document.querySelectorAll('.ingredient-card').forEach(c => c.classList.remove('bg-tan-dark', 'dark:bg-dark-tan-dark', 'animate-bounce'));
-          card.classList.add('bg-tan-dark', 'dark:bg-dark-tan-dark', 'animate-bounce');
-          updateFilterBubbles();
-        });
-        ingredientList.appendChild(card);
-      });
-    }
-
-    // Update filter bubbles
-    function updateFilterBubbles() {
-      const filterBubbles = document.getElementById('filter-bubbles');
-      filterBubbles.innerHTML = '';
-      if (selectedCategory !== 'All') {
-        const categoryBubble = document.createElement('div');
-        categoryBubble.className = 'filter-bubble bg-burgundy text-tan px-4 py-2 rounded-full flex items-center animate-float';
-        categoryBubble.innerHTML = `${selectedCategory} <span class="ml-2 cursor-pointer" onclick="clearCategoryFilter()">✕</span>`;
-        filterBubbles.appendChild(categoryBubble);
-      }
-      if (selectedIngredient) {
-        const ingredientBubble = document.createElement('div');
-        ingredientBubble.className = 'filter-bubble bg-burgundy text-tan px-4 py-2 rounded-full flex items-center animate-float';
-        ingredientBubble.innerHTML = `${selectedIngredient.charAt(0).toUpperCase() + selectedIngredient.slice(1)} <span class="ml-2 cursor-pointer" onclick="clearIngredientFilter()">✕</span>`;
-        filterBubbles.appendChild(ingredientBubble);
-      }
-    }
-
-    // Clear filters
-    function clearCategoryFilter() {
-      selectedCategory = 'All';
-      document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark'));
-      document.getElementById('all-btn').classList.add('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark');
-      updateFilterBubbles();
-      renderIngredients(selectedIngredient);
-    }
-
-    function clearIngredientFilter() {
-      selectedIngredient = null;
-      document.querySelectorAll('.ingredient-card').forEach(c => c.classList.remove('bg-tan-dark', 'dark:bg-dark-tan-dark', 'animate-bounce'));
-      updateFilterBubbles();
-      renderIngredients();
-    }
-
-    // Handle category button clicks
-    document.querySelectorAll('.category-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        selectedCategory = button.textContent;
-        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark', 'animate-scale'));
-        button.classList.add('bg-burgundy-dark', 'dark:bg-dark-burgundy-dark', 'animate-scale');
-        updateFilterBubbles();
-        renderIngredients(selectedIngredient);
-      });
-    });
-
-    // Gradient colors for light and dark modes
-    const gradients = {
-      light: [
-        'linear-gradient(45deg, #D2B48C, #A6808C)', // Tan to soft burgundy
-        'linear-gradient(45deg, #D2B48C, #8B5A2B)', // Tan to warm brown
-        'linear-gradient(45deg, #D2B48C, #A0522D)'  // Tan to sienna
-      ],
-      dark: [
-        'linear-gradient(45deg, #2E2E2E, #A0002A)', // Dark gray to light burgundy
-        'linear-gradient(45deg, #2E2E2E, #4B2E2E)', // Dark gray to dark burgundy
-        'linear-gradient(45deg, #2E2E2E, #3C2F2F)'  // Dark gray to deep brown
-      ]
-    };
-
-    // Randomize meal with screen changes
-    let gradientIndex = 0;
-    document.getElementById('randomize-btn').addEventListener('click', () => {
-      const filteredDishes = dishes.filter(dish => {
-        const categoryMatch = selectedCategory === 'All' || dish.category === selectedCategory;
-        const ingredientMatch = !selectedIngredient || dish.main_ingredients.includes(selectedIngredient);
-        return categoryMatch && ingredientMatch;
-      });
-
-      if (filteredDishes.length === 0) {
-        document.getElementById('result').classList.add('hidden');
-        alert('No dishes match your selection.');
-        return;
-      }
-
-      // Select random dish
-      const randomDish = filteredDishes[Math.floor(Math.random() * filteredDishes.length)];
-      document.getElementById('dish-name').textContent = randomDish.term;
-      document.getElementById('dish-description').textContent = randomDish.definition;
-      document.getElementById('search-prompt').textContent = `Search for: recipe for ${randomDish.term}`;
-      
-      // Update background gradient
-      gradientIndex = (gradientIndex + 1) % gradients.light.length;
-      const isDark = body.classList.contains('dark');
-      document.body.style.background = isDark ? gradients.dark[gradientIndex] : gradients.light[gradientIndex];
-      
-      // Animate result section
-      const resultSection = document.getElementById('result');
-      resultSection.classList.add('hidden');
-      setTimeout(() => {
-        resultSection.classList.remove('hidden');
-        resultSection.classList.add('animate-result');
-      }, 100);
-      
-      // Refresh ingredient cards
-      renderIngredients(selectedIngredient);
-    });
-
-    // Copy search prompt to clipboard
-    document.getElementById('copy-prompt-btn').addEventListener('click', () => {
-      const promptText = document.getElementById('search-prompt').textContent;
-      navigator.clipboard.writeText(promptText).then(() => {
-        const btn = document.getElementById('copy-prompt-btn');
-        btn.textContent = 'Copied!';
-        btn.classList.add('animate-scale');
-        setTimeout(() => {
-          btn.textContent = 'Copy Search Prompt';
-          btn.classList.remove('animate-scale');
-        }, 1000);
-      }).catch(() => {
-        alert('Failed to copy to clipboard. Please copy manually: ' + promptText);
-      });
-    });
-
-    // Intro screen button handlers with sound
-    const clickSound = new Audio('https://freesound.org/data/previews/171/171671_2437358-lq.mp3'); // Public domain click sound
-    document.querySelectorAll('.intro-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        clickSound.play().catch(() => console.log('Sound play failed'));
-        button.classList.add('animate-pulse');
-        setTimeout(() => button.classList.remove('animate-pulse'), 300);
-      });
-    });
-
-    document.getElementById('explore-ingredients').addEventListener('click', () => {
-      document.getElementById('intro-screen').classList.add('hidden');
-      document.getElementById('main-content').classList.remove('hidden');
-      renderIngredients();
-    });
-
-    document.getElementById('random-meal').addEventListener('click', () => {
-      document.getElementById('intro-screen').classList.add('hidden');
-      document.getElementById('main-content').classList.remove('hidden');
-      renderIngredients();
-      document.getElementById('randomize-btn').click();
-    });
-
-    document.getElementById('browse-categories').addEventListener('click', () => {
-      document.getElementById('intro-screen').classList.add('hidden');
-      document.getElementById('main-content').classList.remove('hidden');
-      renderIngredients();
-      document.getElementById('all-btn').click();
-    });
-  </script>
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>

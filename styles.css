@@ -1,178 +1,72 @@
-/* Custom colors for light and dark themes */
-:root {
-  --burgundy: #800020;
-  --burgundy-dark: #660018;
-  --tan: #D2B48C;
-  --tan-dark: #B89778;
-  --dark-bg: #2E2E2E;
-  --dark-burgundy: #A0002A;
-  --dark-burgundy-dark: #800020;
-  --dark-tan: #E8D0A9;
-  --dark-tan-dark: #C8B090;
-}
-
-/* Dark mode styles */
-.dark {
-  --bg: var(--dark-bg);
-  --text: var(--dark-tan);
-  --burgundy: var(--dark-burgundy);
-  --burgundy-dark: var(--dark-burgundy-dark);
-  --tan: var(--dark-tan);
-  --tan-dark: var(--dark-tan-dark);
-  --card-bg: rgba(60, 60, 60, 0.9);
-  --text-secondary: #D1D5DB;
-}
-
-/* Default light mode styles */
+/* Custom styles for the app */
 body {
-  background-color: var(--bg, var(--tan));
-  color: var(--text, #4B5563);
-  background: linear-gradient(45deg, var(--tan), #A6808C);
-  transition: background 1s ease-in-out;
+    font-family: "Inter", sans-serif;
+    background-color: #f0f2f5; /* Light gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
-
-/* Smooth scrolling and box-sizing */
-html {
-  scroll-behavior: smooth;
-  box-sizing: border-box;
+.container {
+    background-color: #ffffff;
+    border-radius: 1.5rem; /* More rounded corners */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    padding: 2.5rem; /* Increased padding */
+    max-width: 900px; /* Wider container */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Increased gap between sections */
 }
-*, *:before, *:after {
-  box-sizing: inherit;
+.food-item-button {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
 }
-
-/* Header and footer styling */
-header, footer {
-  background-color: var(--burgundy);
-  color: var(--tan);
-  z-index: 1000;
-  width: 100%;
-  padding: 0.5rem 1rem;
+.food-item-button:hover {
+    transform: translateY(-5px) scale(1.05); /* Lift and slightly enlarge on hover */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
-
-/* Dark mode toggle button */
-#dark-mode-toggle {
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+.food-item-button:active {
+    transform: translateY(0) scale(1);
+    box-shadow: none;
 }
-.dark #dark-mode-toggle {
-  background-color: var(--dark-tan);
-  color: var(--dark-burgundy);
+.btn-primary {
+    background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Purple gradient */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-/* Intro screen buttons */
-.intro-btn {
-  transition: all 0.3s ease-in-out;
+.btn-primary:hover {
+    background-image: linear-gradient(to right, #4f46e5, #7c3aed);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
-.intro-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: none;
 }
-
-/* Ingredient card hover effect */
-.ingredient-card {
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+.input-field {
+    border: 1px solid #d1d5db; /* Light gray border */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
-.ingredient-card:hover {
-  transform: translateY(-5px);
+.input-field:focus {
+    border-color: #6366f1; /* Purple border on focus */
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); /* Light purple shadow on focus */
+    outline: none;
 }
-
-/* Button hover effect */
-.category-btn, #randomize-btn, #copy-prompt-btn {
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+.prompt-box {
+    background-color: #e0e7ff; /* Lighter blue for prompt box */
+    border: 1px solid #a5b4fc; /* Blue border */
+    color: #4338ca; /* Darker blue text */
 }
-
-/* Scale animation for buttons */
-@keyframes scale {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-.animate-scale {
-  animation: scale 0.2s ease-in-out;
-}
-
-/* Bounce animation for ingredient cards */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-.animate-bounce {
-  animation: bounce 0.3s ease-in-out;
-}
-
-/* Ripple effect for randomize button */
-#randomize-btn::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s ease, height 0.4s ease;
-}
-#randomize-btn:active::after {
-  width: 100px;
-  height: 100px;
-}
-
-/* Result card animation */
-@keyframes resultFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-result {
-  animation: resultFadeIn 0.5s ease-in-out;
-}
-
-/* Filter bubble animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-.filter-bubble {
-  animation: float 2s ease-in-out infinite;
-}
-
-/* Result card */
-#result {
-  background-color: var(--card-bg, rgba(255, 255, 255, 0.9));
-}
-
-/* Ensure main content is not overlapped by fixed header/footer */
-main {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-/* Centered result section */
-#result {
-  max-width: 32rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* Responsive adjustments */
-@media (max-width: 640px) {
-  .ingredient-card {
-    padding: 0.75rem;
-    font-size: 0.9rem;
-  }
-  header h1 {
-    font-size: 1.25rem;
-  }
-  footer p {
-    font-size: 0.75rem;
-  }
-  #intro-screen h2 {
-    font-size: 1.75rem;
-  }
-  #intro-screen p {
-    font-size: 1rem;
-  }
-  .filter-bubble {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-  }
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    .food-items-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Smaller items on mobile */
+    }
 }

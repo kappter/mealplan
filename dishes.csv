@@ -1,0 +1,101 @@
+Type,Name,MainIngredients,Tags
+appetizer,Caprese Skewers,"mozzarella,cherry tomatoes,basil","italian,vegetarian"
+appetizer,Spinach Artichoke Dip,"spinach,artichoke hearts,cream cheese",vegetarian
+appetizer,Garlic Bread,"bread,garlic,butter","italian,quick"
+appetizer,Bruschetta,"tomatoes,basil,bread","italian,vegetarian"
+appetizer,Shrimp Cocktail,"shrimp,cocktail sauce",seafood
+appetizer,Spring Rolls,"cabbage,carrots,rice paper","asian,vegetarian"
+appetizer,Hummus with Pita,"chickpeas,tahini,pita bread","mediterranean,vegetarian"
+appetizer,Stuffed Mushrooms,"mushrooms,bread crumbs,cheese",vegetarian
+appetizer,Calamari Fritti,"calamari,lemon","seafood,fried"
+appetizer,Cheese and Crackers,"cheese,crackers",quick
+entree,Spicy Lentil Soup,"lentils,carrots,celery,tomatoes","vegetarian,healthy,soup"
+entree,Chicken Stir-fry with Broccoli,"chicken,broccoli,bell peppers,soy sauce","quick,asian"
+entree,Eggplant Parmesan,"eggplant,mozzarella,tomato sauce,parmesan","vegetarian,italian"
+entree,Beef Tacos,"ground beef,tortillas,lettuce,cheese,salsa","mexican,quick"
+entree,Vegetable Curry,"potatoes,peas,cauliflower,coconut milk","vegetarian,indian"
+entree,Salmon with Asparagus,"salmon,asparagus,lemon","healthy,fish"
+entree,Pasta Primavera,"pasta,zucchini,cherry tomatoes,spinach","vegetarian,quick"
+entree,Chicken Noodle Soup,"chicken,noodles,carrots,celery","comfort food,soup"
+entree,Shrimp Scampi,"shrimp,pasta,garlic,butter","seafood,italian"
+entree,Black Bean Burgers,"black beans,buns,avocado,lettuce","vegetarian,burger"
+entree,Pork Chops with Apples,"pork chops,apples,onions",comfort food
+entree,Shepherd's Pie,"ground lamb,potatoes,peas,carrots","comfort food,british"
+entree,Pad Thai,"rice noodles,shrimp,tofu,peanuts,bean sprouts","thai,asian"
+entree,Chicken Quesadillas,"chicken,tortillas,cheese,peppers,onions","mexican,quick"
+entree,Broccoli Cheddar Soup,"broccoli,cheddar cheese,milk","vegetarian,soup"
+entree,Fish and Chips,"cod,potatoes,tartar sauce","british,fried"
+entree,Mushroom Risotto,"mushrooms,arborio rice,parmesan","vegetarian,italian"
+entree,Pulled Pork Sandwiches,"pork shoulder,bbq sauce,buns,coleslaw","bbq,comfort food"
+entree,Spinach and Ricotta Stuffed Shells,"pasta shells,ricotta,spinach,marinara sauce","vegetarian,italian"
+entree,Turkey Chili,"ground turkey,beans,tomatoes,chili powder","healthy,comfort food"
+entree,Veggie Burgers,"veggie patty,buns,lettuce,tomato","vegetarian,burger"
+entree,Baked Ziti,"ziti pasta,ricotta,mozzarella,marinara sauce","vegetarian,italian"
+entree,Chicken and Dumplings,"chicken,dumplings,carrots,celery","comfort food,soup"
+entree,Eggplant Rollatini,"eggplant,ricotta,mozzarella,marinara sauce","vegetarian,italian"
+entree,Lentil Burgers,"lentils,buns,lettuce,tomato","vegetarian,burger"
+entree,Chicken Fajitas,"chicken,bell peppers,onions,tortillas","mexican,quick"
+entree,Sweet Potato and Black Bean Chili,"sweet potato,black beans,corn,chili powder","vegetarian,healthy,chili"
+entree,Beef and Broccoli,"beef,broccoli,soy sauce","asian,quick"
+entree,Mushroom and Spinach Lasagna,"lasagna noodles,mushrooms,spinach,ricotta,marinara sauce","vegetarian,italian"
+entree,Chicken Pot Pie,"chicken,peas,carrots,potatoes,pie crust",comfort food
+entree,Shrimp Tacos,"shrimp,tortillas,cabbage slaw,lime crema","mexican,seafood"
+entree,Vegetable Lasagna,"lasagna noodles,zucchini,spinach,ricotta,marinara sauce","vegetarian,italian"
+entree,Pork Tenderloin with Roasted Vegetables,"pork tenderloin,carrots,potatoes,brussels sprouts",healthy
+entree,Chicken and Rice Soup,"chicken,rice,carrots,celery","comfort food,soup"
+entree,Lentil Shepherd's Pie,"lentils,potatoes,peas,carrots","vegetarian,comfort food"
+entree,Spaghetti with Meat Sauce,"spaghetti,ground beef,tomato sauce,onions",italian
+entree,Chicken and Vegetable Skewers,"chicken,bell peppers,onions,zucchini","healthy,grill"
+entree,Stuffed Bell Peppers,"bell peppers,ground beef,rice,tomato sauce",comfort food
+entree,Vegetable Stir-fry,"broccoli,carrots,bell peppers,snow peas,tofu","vegetarian,asian"
+entree,Chicken Alfredo,"fettuccine,chicken,heavy cream,parmesan",italian
+entree,Minestrone Soup,"pasta,beans,zucchini,carrots,tomatoes","vegetarian,soup"
+entree,Beef Stew,"beef,potatoes,carrots,onions",comfort food
+entree,Spinach and Artichoke Dip Pasta,"pasta,spinach,artichoke hearts,cream cheese",vegetarian
+entree,Chicken Parmesan,"chicken breast,mozzarella,marinara sauce,pasta",italian
+entree,Tuna Casserole,"tuna,pasta,cream of mushroom soup,peas",comfort food
+entree,Veggie Chili,"beans,corn,tomatoes,peppers,onions","vegetarian,chili"
+entree,Pork Carnitas,"pork shoulder,tortillas,onions,cilantro",mexican
+entree,Chicken and Waffles,"chicken,waffles,syrup","comfort food,brunch"
+entree,Stuffed Cabbage Rolls,"cabbage,ground beef,rice,tomato sauce",comfort food
+entree,Chicken and Broccoli Bake,"chicken,broccoli,rice,cheese sauce",comfort food
+entree,Eggplant Lasagna,"eggplant,ricotta,mozzarella,marinara sauce","vegetarian,italian"
+entree,Shrimp Fried Rice,"shrimp,rice,peas,carrots,eggs","asian,quick"
+entree,Beef and Bean Burritos,"ground beef,beans,tortillas,cheese","mexican,quick"
+entree,Spinach and Feta Stuffed Chicken,"chicken breast,spinach,feta",healthy
+entree,Chicken and Vegetable Curry,"chicken,potatoes,peas,cauliflower,coconut milk",indian
+entree,Mushroom and Swiss Burgers,"ground beef,mushrooms,swiss cheese,buns",burger
+entree,Pork and Bean Chili,"pork,beans,tomatoes,chili powder",chili
+entree,Chicken and Wild Rice Soup,"chicken,wild rice,mushrooms,carrots","comfort food,soup"
+entree,Stuffed Acorn Squash,"acorn squash,sausage,apples,cranberries",vegetarian option
+entree,Lentil Tacos,"lentils,tortillas,lettuce,salsa","vegetarian,mexican"
+entree,Shrimp and Grits,"shrimp,grits,bacon,cheddar",southern
+entree,Beef Stroganoff,"beef sirloin,egg noodles,mushrooms,sour cream",comfort food
+entree,Chicken and Rice Casserole,"chicken,rice,cream of mushroom soup,broccoli",comfort food
+entree,Eggplant Stir-fry,"eggplant,bell peppers,onions,soy sauce","vegetarian,asian"
+entree,Lentil Soup with Sausage,"lentils,sausage,carrots,celery","comfort food,soup"
+entree,Pulled Chicken Sandwiches,"chicken,bbq sauce,buns,coleslaw",bbq
+entree,Chicken and Black Bean Burritos,"chicken,black beans,rice,tortillas","mexican,quick"
+entree,Pork Chops with Gravy,"pork chops,potatoes,green beans,gravy",comfort food
+entree,Chicken and Corn Chowder,"chicken,corn,potatoes,cream","soup,comfort food"
+entree,Stuffed Pork Chops,"pork chops,stuffing,apples",comfort food
+entree,Vegetable and Tofu Stir-fry,"tofu,broccoli,carrots,bell peppers","vegetarian,asian"
+entree,Chicken and Mushroom Pasta,"chicken,mushrooms,pasta,cream sauce",italian
+entree,Lentil and Vegetable Stew,"lentils,potatoes,carrots,celery,tomatoes","vegetarian,healthy,stew"
+entree,Beef and Vegetable Skewers,"beef,bell peppers,onions,cherry tomatoes","healthy,grill"
+entree,Spinach and Ricotta Cannelloni,"cannelloni,ricotta,spinach,marinara sauce","vegetarian,italian"
+side,Garlic Mashed Potatoes,"potatoes,garlic,butter",comfort food
+side,Roasted Asparagus,"asparagus,olive oil,garlic","healthy,vegetable"
+side,Steamed Green Beans,"green beans,butter","healthy,vegetable"
+side,Side Salad,"lettuce,cucumber,tomatoes","healthy,vegetarian"
+side,Rice Pilaf,"rice,broth,peas",grain
+side,Corn on the Cob,"corn,butter",vegetable
+side,Sweet Potato Fries,"sweet potato,oil",fried
+side,Coleslaw,"cabbage,carrots,mayonnaise",salad
+side,Quinoa Salad,"quinoa,cucumber,bell peppers","healthy,vegetarian"
+side,Roasted Brussels Sprouts,"brussels sprouts,bacon","healthy,vegetable"
+side,Baked Potato,"potato,butter,sour cream",comfort food
+side,Mac and Cheese,"macaroni,cheese,milk",comfort food
+side,Dinner Rolls,"bread,butter",bread
+side,Couscous,"couscous,vegetable broth",grain
+side,Creamed Spinach,"spinach,cream,cheese",vegetable
