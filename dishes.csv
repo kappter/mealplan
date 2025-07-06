@@ -9,6 +9,12 @@ appetizer,Hummus with Pita,"chickpeas,tahini,pita bread","mediterranean,vegetari
 appetizer,Stuffed Mushrooms,"mushrooms,bread crumbs,cheese",vegetarian
 appetizer,Calamari Fritti,"calamari,lemon","seafood,fried"
 appetizer,Cheese and Crackers,"cheese,crackers",quick
+appetizer,Arancini,"arborio rice,mozzarella,peas","italian,fried"
+appetizer,Fried Zucchini,"zucchini,flour,parmesan","italian,vegetarian"
+appetizer,Guacamole with Chips,"avocado,lime,cilantro","mexican,vegetarian"
+appetizer,Queso Fundido,"cheese,chorizo,tortilla chips","mexican,comfort food"
+appetizer,Saganaki (Fried Cheese),"halloumi,lemon",greek
+appetizer,Tzatziki with Cucumber,"yogurt,cucumber,garlic",greek
 entree,Spicy Lentil Soup,"lentils,carrots,celery,tomatoes","vegetarian,healthy,soup"
 entree,Chicken Stir-fry with Broccoli,"chicken,broccoli,bell peppers,soy sauce","quick,asian"
 entree,Eggplant Parmesan,"eggplant,mozzarella,tomato sauce,parmesan","vegetarian,italian"
@@ -84,6 +90,25 @@ entree,Chicken and Mushroom Pasta,"chicken,mushrooms,pasta,cream sauce",italian
 entree,Lentil and Vegetable Stew,"lentils,potatoes,carrots,celery,tomatoes","vegetarian,healthy,stew"
 entree,Beef and Vegetable Skewers,"beef,bell peppers,onions,cherry tomatoes","healthy,grill"
 entree,Spinach and Ricotta Cannelloni,"cannelloni,ricotta,spinach,marinara sauce","vegetarian,italian"
+entree,Spaghetti Carbonara,"spaghetti,eggs,pancetta,parmesan",italian
+entree,Chicken Piccata,"chicken breast,lemon,capers,pasta",italian
+entree,Pork Souvlaki,"pork,pita bread,tzatziki,tomatoes",greek
+entree,Moussaka,"eggplant,ground lamb,bechamel sauce",greek
+entree,Chicken Enchiladas,"chicken,tortillas,enchilada sauce,cheese",mexican
+entree,Chiles Rellenos,"poblano peppers,cheese,tomato sauce",mexican
+entree,Pastitsio,"pasta,ground beef,bechamel sauce",greek
+entree,Birria Tacos,"beef,corn tortillas,cheese,consommé",mexican
+entree,Fettuccine Alfredo,"fettuccine,heavy cream,parmesan","italian,vegetarian"
+entree,Gyro,"lamb,pita bread,tzatziki,tomatoes",greek
+entree,Chicken Marsala,"chicken,mushrooms,marsala wine",italian
+entree,Tostadas,"tortillas,beans,lettuce,cheese",mexican
+entree,Spanakopita,"spinach,feta,phyllo dough","greek,vegetarian"
+entree,Pork Gyros,"pork,pita bread,tzatziki,fries",greek
+entree,Chicken Cacciatore,"chicken,bell peppers,onions,tomatoes",italian
+entree,Pozole Rojo,"pork,hominy,chili broth",mexican
+entree,Greek Lemon Chicken,"chicken,lemon,oregano,potatoes",greek
+entree,Pork Milanese,"pork cutlet,bread crumbs,lemon",italian
+entree,Tacos Al Pastor,"pork,pineapple,tortillas,cilantro",mexican
 side,Garlic Mashed Potatoes,"potatoes,garlic,butter",comfort food
 side,Roasted Asparagus,"asparagus,olive oil,garlic","healthy,vegetable"
 side,Steamed Green Beans,"green beans,butter","healthy,vegetable"
@@ -99,3 +124,12 @@ side,Mac and Cheese,"macaroni,cheese,milk",comfort food
 side,Dinner Rolls,"bread,butter",bread
 side,Couscous,"couscous,vegetable broth",grain
 side,Creamed Spinach,"spinach,cream,cheese",vegetable
+side,Greek Salad,"cucumber,tomatoes,feta,olives",greek
+side,Pita Bread,"flour,yeast",greek
+side,Refried Beans,"pinto beans,lard",mexican
+side,Mexican Rice,"rice,tomatoes,peas",mexican
+side,Roasted Potatoes,"potatoes,rosemary,garlic",italian
+side,Broccolini with Garlic,"broccolini,garlic,olive oil",italian
+side,Elote (Mexican Street Corn),"corn,mayonnaise,cotija cheese",mexican
+side,Patates Tiganites (Greek Fries),"potatoes,oregano,feta",greek
+side,Fagioli all'Uccelletto (Beans with Sage),"cannellini beans,sage,tomatoes",italian
