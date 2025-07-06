@@ -1,46 +1,68 @@
-# Meal Randomizer
+# Meal Randomizer App
 
-## Description
-Meal Randomizer is a web application designed to inspire your culinary adventures by generating a complete meal combo consisting of an appetizer, entree, and side, tailored to your chosen category or ingredient. With a dreamy, user-friendly interface, the app offers a delightful way to explore American and Mexican cuisines, presenting each dish with a description and a combined recipe search prompt. Built with HTML, CSS (Tailwind and custom styles), and JavaScript, it features a visually appealing burgundy and tan theme, with a dark mode option for comfortable viewing.
+This is a simple web-based application that helps you randomize full meal ideas, including an appetizer, an entree, and a side dish. You can also filter entree suggestions based on specific ingredients you have on hand. It features a modern, responsive design with a light/dark mode toggle.
 
 ## Features
-- **Meal Combo Generation**: Randomly selects an appetizer, entree, and side from the chosen category (e.g., Mexican Food) or all categories, with optional ingredient filtering to ensure all dishes include the selected ingredient.
-- **Floating Concept Bubbles**: Displays applied filters (category and ingredient) as animated, rounded bubbles that float gently above the main content, with close buttons to remove filters.
-- **Dynamic UI Responses**: Buttons and ingredient cards animate on click (scale, bounce, ripple effects) for an engaging experience, with a subtle click sound on intro screen buttons.
-- **Randomized Visual Refresh**: Each press of the "Randomize Meal" button changes the background gradient, animates the result display, and shuffles ingredient cards for a fresh look.
-- **Copy Search Prompt**: Copies a combined search prompt (e.g., “Search for: recipe for Mozzarella Sticks, Hamburger, and French Fries”) to the clipboard with a single click, with visual feedback confirming the action.
-- **Dark Mode Toggle**: Switches between light (burgundy/tan) and dark themes, with preferences saved in `localStorage` for persistence.
-- **Responsive Design**: Optimized for mobile and desktop, with centered content, adaptive layouts, and bubble-like text backgrounds for readability.
-- **Extensive Dish Database**: Includes a variety of dishes, with 20 Mexican dishes (e.g., Tacos al Pastor, Churros) and American classics, stored in `us_dishes.csv`.
 
-## Benefits
-- **Meal Planning Made Easy**: Get a complete meal idea with appetizer, entree, and side, perfect for planning dinners or exploring new cuisines.
-- **Inspiration for Culinary Creativity**: Discover curated meal combos tailored to your preferences, sparking ideas for your next meal.
-- **Time-Saving**: Quickly generate and copy a recipe search prompt for the entire meal, streamlining the process of finding recipes online.
-- **Customizable**: Filter by category or ingredient to focus on specific cuisines or dietary needs, with visual feedback via floating bubbles.
-- **Aesthetic Appeal**: The burgundy/tan theme, smooth animations, bubble-like text containers, and dark mode option create a visually stunning and comfortable experience.
-- **Accessible**: Responsive design ensures usability across devices, with accessibility features like `aria-label` for the dark mode toggle and high-contrast text.
+* **Randomize Full Meal:** Get a complete meal idea (appetizer, entree, side) with a single click.
+* **Filter by Entree Ingredient:** Specify an ingredient you want to use, and the app will suggest an entree containing it, along with a random appetizer and side.
+* **Clickable Food Items:** Quickly select a main entree ingredient from a list of popular options to filter your meal.
+* **Recipe Prompt Generation:** The app generates a detailed search query or AI prompt for your selected meal, making it easy to find recipes online.
+* **Light/Dark Mode:** Toggle between a light and dark theme for comfortable viewing.
 
-## Usage
-1. **Setup**:
-   - Host `meal_randomizer.html`, `styles.css`, and `us_dishes.csv` on a web server.
-   - Update the JavaScript in `meal_randomizer.html` to fetch `us_dishes.csv`:
-     ```javascript
-     fetch('us_dishes.csv').then(response => response.text()).then(data => Papa.parse(data, ...));
-     ```
-   - Ensure dependencies (PapaParse, Tailwind CSS) are loaded via CDNs.
+## How to Use
 
-2. **Interaction**:
-   - Start on the intro screen and click “Savor by Ingredient,” “Surprise Me,” or “Explore Categories” to begin.
-   - Select a category (e.g., Mexican Food) or ingredient (e.g., tortilla) to filter dishes; filters appear as floating bubbles.
-   - Click “Randomize Meal” to generate a meal combo (appetizer, entree, side), triggering a new background gradient and result animation.
-   - Use the “Copy Search Prompt” button to copy a combined recipe search query to your clipboard.
-   - Toggle dark mode via the header button for a different visual experience.
+1.  **Randomize Meal:** Click the "Randomize Full Meal" button to get a random appetizer, entree, and side dish combination.
+2.  **Filter by Ingredient:**
+    * Type an ingredient (e.g., "Eggplant," "Chicken," "Lentils") into the "Have an entree ingredient to use?" input field.
+    * Click "Find Meal with Entree Ingredient" to get a meal where the entree contains that ingredient.
+3.  **Click Food Item:** Below the input box, click on any of the "main entree food item" buttons (e.g., "Lentils," "Chicken," "Eggplant") to get a meal suggestion centered around that specific entree ingredient.
+4.  **Recipe Prompt:** After a meal is selected, a "Recipe Search / AI Prompt" will appear at the bottom. You can copy this text and use it in a search engine or an AI model to find detailed recipes for your chosen meal.
+5.  **Toggle Theme:** Use the sun/moon toggle switch in the top right corner to switch between light and dark mode.
 
-## Notes
-- The app uses `us_dishes.csv` with comma-separated, quoted `main_ingredients` for reliable parsing.
-- For production, replace the simulated CSV data in the HTML with a fetch to the hosted CSV file.
-- Future enhancements could include dish images, a favorites list, or integration with a recipe API.
-- For categories with limited dish types (e.g., Mexican Food), the app allows dishes to be selected across types to ensure a complete combo.
+## Customizing Your Meals
 
-Embark on a culinary journey with Meal Randomizer, where every click crafts a delicious meal combo tailored to your tastes!
+The meal data is stored in `dishes.csv`. You can open this file in any text editor or spreadsheet program and modify it to add, remove, or change meal options.
+
+The columns are:
+* `Type`: Must be `appetizer`, `entree`, or `side`.
+* `Name`: The name of the dish.
+* `MainIngredients`: A comma-separated list of key ingredients (e.g., `"chicken,broccoli,bell peppers"`).
+* `Tags`: A comma-separated list of descriptive tags (e.g., `"vegetarian,healthy,soup"`).
+
+**Important:** When editing `MainIngredients` or `Tags`, ensure ingredients/tags are separated by commas. If an ingredient or tag itself contains a comma, you would typically enclose the entire field in double quotes (e.g., `"sweet potato, white"`), but for simplicity, try to avoid commas within individual ingredient/tag names if possible.
+
+## Deployment to GitHub Pages
+
+To deploy this application to GitHub Pages:
+
+1.  **Create a new GitHub Repository:**
+    * Go to [GitHub](https://github.com/) and create a new repository.
+    * Give it a name (e.g., `meal-randomizer`).
+    * Initialize it with a README (optional, as you'll replace it).
+2.  **Clone the Repository:**
+    ```bash
+    git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
+    cd YOUR_REPOSITORY_NAME
+    ```
+3.  **Add the Files:**
+    * Save the `index.html`, `style.css`, `script.js`, `dishes.csv`, and `README.md` files into the root of your cloned repository folder.
+4.  **Commit and Push:**
+    ```bash
+    git add .
+    git commit -m "Initial commit of meal randomizer app"
+    git push origin main
+    ```
+    (Or `master` if your default branch is `master`)
+5.  **Enable GitHub Pages:**
+    * Go to your repository on GitHub.
+    * Click on "Settings" (usually near the top right).
+    * In the left sidebar, click "Pages."
+    * Under "Build and deployment," select "Deploy from a branch."
+    * For "Branch," choose `main` (or `master`) and select `/ (root)` for the folder.
+    * Click "Save."
+6.  **Access Your App:**
+    * GitHub Pages will build and deploy your site. This might take a few minutes.
+    * Once deployed, the URL will be displayed on the "Pages" settings page (it will typically be `https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/`).
+
+Now you have a fully functional Meal Randomizer app hosted on GitHub Pages!
