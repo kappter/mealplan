@@ -16,6 +16,7 @@ const baseIngredientInput = document.getElementById('base-ingredient-input');
 const filterButton = document.getElementById('filter-button');
 const foodItemsContainer = document.getElementById('food-items-container');
 const promptDisplay = document.getElementById('prompt-display');
+const themeToggle = document.getElementById('theme-toggle'); // New: Theme toggle element
 
 let allEntreeIngredients = []; // This will be populated after CSV is loaded
 
@@ -194,6 +195,42 @@ function randomizeFullMeal(filterEntreeIngredient = null) {
     promptDisplay.textContent = prompt;
 }
 
+/**
+ * Handles the light/dark mode toggle.
+ */
+function toggleTheme() {
+    const body = document.body;
+    const isDarkMode = body.classList.toggle('dark-mode');
+    // Also toggle light-mode class to ensure proper transitions and default states
+    body.classList.toggle('light-mode', !isDarkMode);
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light'); // Save preference
+}
+
+/**
+ * Sets the initial theme based on localStorage or system preference.
+ */
+function setInitialTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggle.checked = true; // Set toggle switch to checked for dark mode
+        } else {
+            document.body.classList.add('light-mode');
+            themeToggle.checked = false; // Set toggle switch to unchecked for light mode
+        }
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // Default to dark mode if system preference is dark and no saved theme
+        document.body.classList.add('dark-mode');
+        themeToggle.checked = true;
+    } else {
+        // Default to light mode
+        document.body.classList.add('light-mode');
+        themeToggle.checked = false;
+    }
+}
+
+
 // Event Listeners
 randomizeButton.addEventListener('click', () => randomizeFullMeal());
 filterButton.addEventListener('click', () => {
@@ -210,8 +247,13 @@ filterButton.addEventListener('click', () => {
     }
 });
 
-// Initial load of dishes from CSV when the page loads
-document.addEventListener('DOMContentLoaded', loadDishesFromCSV);
+themeToggle.addEventListener('change', toggleTheme); // New: Event listener for theme toggle
+
+// Initial load of dishes from CSV and theme setting when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    setInitialTheme(); // Set theme first
+    loadDishesFromCSV(); // Then load dishes
+});
 
 // Optional: Clear input when randomize button is clicked after a filter
 randomizeButton.addEventListener('click', () => {
