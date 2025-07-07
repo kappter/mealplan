@@ -21,11 +21,13 @@ body.light-mode {
     background-color: #ffffff;
     border-radius: 0.75rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
 }
 .light-mode .container h1 {
     color: #111827; /* Dark heading */
     font-size: 1.5rem;
     font-weight: 700;
+    margin-bottom: 1rem;
 }
 .light-mode .container h2,
 .light-mode .container h3,
@@ -36,18 +38,19 @@ body.light-mode {
     background-color: #f3f4f6; /* Light gray card */
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 .light-mode .meal-display-card h2 {
     color: #4b5563; /* Darker gray for headings */
     font-size: 1.125rem;
     font-weight: 600;
+    margin: 0.25rem 0;
 }
 .light-mode .filter-card {
     background-color: #ffffff;
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 .light-mode .input-field {
     border: 1px solid #d1d5db;
@@ -58,6 +61,7 @@ body.light-mode {
     font-size: 1rem;
     width: 100%;
     max-width: 200px;
+    margin-right: 0.5rem;
 }
 .light-mode .input-field::placeholder {
     color: #9ca3af;
@@ -90,6 +94,7 @@ body.light-mode {
     cursor: pointer;
     margin: 0.25rem;
     text-transform: capitalize;
+    white-space: nowrap;
 }
 .light-mode .food-item-button:hover {
     background-color: #c7d2fe;
@@ -99,13 +104,13 @@ body.light-mode {
     background-color: #f3f4f6;
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-top: 1rem;
     color: #4b5563;
 }
 .light-mode .prompt-box h3 {
     color: #4b5563;
     font-size: 1rem;
     font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
 /* Dark Mode Styles */
@@ -117,11 +122,13 @@ body.dark-mode {
     background-color: #2d3748;
     border-radius: 0.75rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
 }
 .dark-mode .container h1 {
     color: #f9fafb;
     font-size: 1.5rem;
     font-weight: 700;
+    margin-bottom: 1rem;
 }
 .dark-mode .container h2,
 .dark-mode .container h3,
@@ -132,18 +139,19 @@ body.dark-mode {
     background-color: #374151;
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 .dark-mode .meal-display-card h2 {
     color: #e5e7eb;
     font-size: 1.125rem;
     font-weight: 600;
+    margin: 0.25rem 0;
 }
 .dark-mode .filter-card {
     background-color: #2d3748;
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 .dark-mode .input-field {
     border: 1px solid #4b5563;
@@ -154,6 +162,7 @@ body.dark-mode {
     font-size: 1rem;
     width: 100%;
     max-width: 200px;
+    margin-right: 0.5rem;
 }
 .dark-mode .input-field::placeholder {
     color: #6b7280;
@@ -176,7 +185,7 @@ body.dark-mode {
     background-color: #3b82f6;
 }
 .dark-mode .food-item-button {
-    background-color: #4c51bf; /* Darker purple button */
+    background-color: #8b5cf6; /* Darker purple button */
     color: #e5e7eb;
     font-weight: 500;
     font-size: 0.875rem;
@@ -186,27 +195,27 @@ body.dark-mode {
     cursor: pointer;
     margin: 0.25rem;
     text-transform: capitalize;
+    white-space: nowrap;
 }
 .dark-mode .food-item-button:hover {
-    background-color: #5d5fef;
+    background-color: #7c3aed;
     color: #ffffff;
 }
 .dark-mode .prompt-box {
     background-color: #374151;
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-top: 1rem;
     color: #e5e7eb;
 }
 .dark-mode .prompt-box h3 {
     color: #e5e7eb;
     font-size: 1rem;
     font-weight: 600;
+    margin-bottom: 0.5rem;
 }
 
 /* General Styles */
 .container {
-    padding: 1.5rem;
     max-width: 600px;
     width: 100%;
     display: flex;
